@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/PrimisTech/PrimisPlayer-android")
+            credentials {
+                username = 'token'
+                password = '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'
+            }
+        }
+    }
+}
+rootProject.name = "Android Sample Application"
+include ':app'

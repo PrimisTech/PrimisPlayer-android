@@ -1,0 +1,7 @@
+/.gradle
+/.idea
+/build
+/gradle
+/src/proguard-rules.pro
+gradlew
+gradlew.bat
