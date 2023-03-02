@@ -1,7 +1,7 @@
 /.gradle
 /.idea
 /build
-/gradle
+gradle/wrapper/gradle-wrapper.jar
 /src/proguard-rules.pro
-gradlew
 gradlew.bat
+gradlew
