@@ -44,10 +44,10 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Support for Google IMA SDK
-    implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.22.3'
+    implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.28.2'
 
     // AAR implementation
-    implementation files('libs/primisplayer-release-v1.8.7.aar')
+    implementation files('libs/primisplayer-release-v1.9.0.aar')
 
     // Used by PrimisPlayer
     implementation 'com.google.code.gson:gson:2.8.6'

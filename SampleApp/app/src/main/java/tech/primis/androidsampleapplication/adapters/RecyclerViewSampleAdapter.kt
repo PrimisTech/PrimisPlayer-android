@@ -9,6 +9,7 @@ import tech.primis.androidsampleapplication.databinding.ItemMockBinding
 import tech.primis.androidsampleapplication.databinding.ItemPlayerBinding
 import tech.primis.androidsampleapplication.utils.Constants
 import tech.primis.player.PrimisPlayer
+import tech.primis.player.configuration.PrimisConfiguration
 
 /*
  * This is an example class for a RecyclerView adapter that shows the Primis player and interacts
@@ -114,33 +115,14 @@ class RecyclerViewSampleAdapter :
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
-        // Create and initialize the PrimisPlayer instance.
-
-        // The apply function is then called on the PrimisPlayer object, which allows the setConfig
-        // method to be called with a list of configuration parameters.
-
+        // Create a PrimisPlayer instance using the configuration builder.
         // The also function then used to add the player to the RecyclerView
 
-        primisPlayer =
-            PrimisPlayer(recyclerView.context)
-                .apply {
-
-                    val config = listOf(
-                        // Placement id
-                        PrimisPlayer.param("placementId", Constants.PLACEMENT_ID),
-
-                        // The RecyclerView
-                        PrimisPlayer.param("isInRecyclerView", recyclerView)
-                    )
-
-                    // Setting the player configuration list
-                    setConfig(config)
-                }
-                .also {
-
-                    // Add the player to the RecyclerView
-                    it.add()
-                }
+        primisPlayer = PrimisConfiguration.Builder()
+            .placement(Constants.PLACEMENT_ID)
+            .recyclerView(recyclerView)
+            .createPlayer(recyclerView.context)
+            .also { it.add() }
     }
 
     // Called when the adapter is detached from the RecyclerView
