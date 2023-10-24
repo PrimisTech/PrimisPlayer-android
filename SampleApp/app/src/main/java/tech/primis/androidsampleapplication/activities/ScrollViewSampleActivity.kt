@@ -4,6 +4,7 @@ import android.os.Bundle
 import tech.primis.androidsampleapplication.utils.Constants
 import tech.primis.androidsampleapplication.databinding.ActivityScrollViewSampleBinding
 import tech.primis.player.PrimisPlayer
+import tech.primis.player.configuration.PrimisConfiguration
 
 /*
  * This activity class demonstrates how to implement the [PrimisPlayer] Android SDK inside a
@@ -32,30 +33,13 @@ class ScrollViewSampleActivity : SampleBaseActivity() {
 
         // Create and initialize the PrimisPlayer instance.
 
-        // The apply function is then called on the PrimisPlayer object, which allows the setConfig
-        // method to be called with a list of configuration parameters.
-
         // The also function then used to add the player to the view
-        primisPlayer =
-            PrimisPlayer(this)
-                .apply {
-
-                    val config = listOf(
-                        // Placement id
-                        PrimisPlayer.param("placementId", Constants.PLACEMENT_ID),
-
-                        // The player container - a FrameLayout to contain the player
-                        PrimisPlayer.param("primisPlayerContainer", binding.playerContainer)
-                    )
-
-                    // Set the player configuration list
-                    setConfig(config)
-                }
-                .also {
-
-                    // Add the player to the layout
-                    it.add()
-                }
+        primisPlayer = PrimisConfiguration.Builder()
+            .placement(Constants.PLACEMENT_ID)
+            .playerContainer(binding.playerContainer)
+            .createPlayer(this).also {
+                it.add()
+            }
     }
 
     override fun onDestroy() {

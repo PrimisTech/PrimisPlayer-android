@@ -8,6 +8,7 @@ import tech.primis.androidsampleapplication.utils.Constants
 import tech.primis.androidsampleapplication.databinding.ActivityWebViewSampleBinding
 import tech.primis.player.PrimisPlayer
 import tech.primis.player.PrimisScrollJSInterface
+import tech.primis.player.configuration.PrimisConfiguration
 
 /*
  * This class sets up a WebView to display a webpage and initializes the PrimisPlayer SDK to display
@@ -59,42 +60,16 @@ class WebViewSampleActivity : SampleBaseActivity() {
 
                         // Create and initialize the PrimisPlayer instance.
 
-                        // The apply function is then called on the PrimisPlayer object, which
-                        // allows the setConfig method to be called with a list of configuration
-                        // parameters.
-
                         // The also function then used to add the player to the view
 
-                        primisPlayer =
-                            PrimisPlayer(this@WebViewSampleActivity)
-                                .apply {
-
-                                    val config = listOf(
-
-                                        // Placement id
-                                        PrimisPlayer.param(
-                                            "placementId", Constants.PLACEMENT_ID
-                                        ),
-
-                                        // The app's Webview
-                                        PrimisPlayer.param("isInWebViewApp", webView),
-
-                                        // The Scroll JS interface
-                                        PrimisPlayer.param(
-                                            "hostAppWebViewJSScrollInterface",
-                                            primisScrollJSInterface
-                                        )
-                                    )
-
-                                    // Setting the player configuration list
-                                    setConfig(config)
-                                }
-                                .also {
-
-                                    // Calling the player's add() method
-                                    it.add()
-                                }
-
+                        primisPlayer = PrimisConfiguration.Builder()
+                            .placement(Constants.PLACEMENT_ID)
+                            .hostAppWebView(webView)
+                            .hostAppWebViewJSInterface(primisScrollJSInterface)
+                            .createPlayer(this@WebViewSampleActivity)
+                            .also {
+                                it.add()
+                            }
                     }
                 }
             }
